@@ -19,9 +19,9 @@ BOOTMODE=false;
 ps | grep zygote | grep -v grep >/dev/null && BOOTMODE=true;
 $BOOTMODE || ps -A 2>/dev/null | grep zygote | grep -v grep >/dev/null && BOOTMODE=true;
 
-ui_print "########################################";
-ui_print "#    TWRP installer for A/B devices    #";
-ui_print "########################################";
+ui_print "####################################################";
+ui_print "# TWRP installer for Nokia 8 (NB1)      v3.7.0_12.0#";
+ui_print "####################################################";
 ui_print " ";
 
 # /dev/tmp is safe for both booted and recovery installs
@@ -66,7 +66,7 @@ for slot in _a _b; do
     $tool repack boot.img || abort "Failed to repack image!";
     $tool cleanup;
   else
-    ui_print "Flashing image to $name$slot...";
+    ui_print "Flashing new boot image to $name$slot...";
     cp -f $recoveryimg new-boot.img;
   fi;
 
@@ -77,15 +77,15 @@ done;
 
 if [ "$recoverycpio" ]; then
   ui_print " ";
-  ui_print "Image patching complete!";
+  ui_print "Boot image patching complete.";
 fi;
 
 cd /;
 rm -rf /dev/tmp;
 
 ui_print " ";
-ui_print "Done installing TWRP!";
+ui_print "TWRP installed successfully!";
 if [ "$name" != "recovery" ]; then
   ui_print " ";
-  ui_print "*** NOTE: You are now unrooted! ***";
+  ui_print "Warning: You are now unrooted! You can flash Magisk again to gain root access, else you can just ignore this warning.";
 fi;
